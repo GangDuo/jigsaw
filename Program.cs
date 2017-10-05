@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
+using jigsaw.Helpers;
 
 namespace jigsaw
 {
@@ -10,6 +7,14 @@ namespace jigsaw
     {
         static void Main(string[] args)
         {
+            Engine.ReceiptCollection sources = null;
+            using (var sr = new System.IO.StreamReader("Sale.txt", Encoding.UTF8))
+            {
+                sources = new Engine.ReceiptCollection(sr.ReadToEnd());
+                sources.Parse();
+            }
+
+            (new Text.Csv()).ConvertDataTableToCsv(sources.ToDataTable(), "out.csv", true);
         }
     }
 }

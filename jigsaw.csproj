@@ -44,11 +44,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Engine\AbstractParser.cs" />
+    <Compile Include="Engine\Deposit.cs" />
+    <Compile Include="Engine\Footer.cs" />
+    <Compile Include="Engine\Goods.cs" />
+    <Compile Include="Engine\GoodsCollection.cs" />
+    <Compile Include="Engine\Header.cs" />
+    <Compile Include="Engine\Membership.cs" />
+    <Compile Include="Engine\Meta.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Engine\Receipt.cs" />
+    <Compile Include="Engine\ReceiptCollection.cs" />
+    <Compile Include="Engine\Total.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Text\Text.csproj">
+      <Project>{0f6ba882-8777-47f4-a40a-5c8b3e8b1037}</Project>
+      <Name>Text</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
