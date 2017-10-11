@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using jigsaw.Helpers;
 
 namespace jigsaw
 {
@@ -14,7 +13,8 @@ namespace jigsaw
                 sources.Parse();
             }
 
-            (new Text.Csv()).ConvertDataTableToCsv(sources.ToDataTable(), "out.csv", true);
+            var expression = new Helpers.Expression(sources);
+            (new Text.Csv()).ConvertDataTableToCsv(expression.ToDataTable(), "out.csv", true);
         }
     }
 }

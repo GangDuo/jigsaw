@@ -1,43 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace jigsaw.Helpers
 {
-    static class Extensions
+    class Expression
     {
-        public static System.Data.DataTable ToDataTable(this Engine.ReceiptCollection source)
+        private Engine.ReceiptCollection Source;
+
+        public Expression(Engine.ReceiptCollection source)
         {
-            var table = new System.Data.DataTable();
-            table.Columns.AddRange(new System.Data.DataColumn[]
+            Source = source;
+        }
+
+        public DataTable ToDataTable()
+        {
+            var table = new DataTable();
+            table.Columns.AddRange(new DataColumn[]
             {
-                new System.Data.DataColumn("レシート番号", typeof(String)),
-                new System.Data.DataColumn("住所",         typeof(String)),
-                new System.Data.DataColumn("電話番号",     typeof(String)),
-                new System.Data.DataColumn("店舗名",       typeof(String)),
-                new System.Data.DataColumn("日時",         typeof(DateTime)),
-                new System.Data.DataColumn("店舗コード",   typeof(String)),
-                new System.Data.DataColumn("POS",          typeof(String)),
-                new System.Data.DataColumn("スタッフ",     typeof(String)),
-                new System.Data.DataColumn("返品",         typeof(Boolean)),
-                new System.Data.DataColumn("品名",         typeof(String)),
-                new System.Data.DataColumn("JAN",          typeof(String)),
-                new System.Data.DataColumn("上代",         typeof(Int32)),
-                new System.Data.DataColumn("数量",         typeof(Int32)),
-                new System.Data.DataColumn("商品合計",     typeof(Decimal)),
-                new System.Data.DataColumn("商品割引",     typeof(String)),
-                new System.Data.DataColumn("お買上点数",   typeof(String)),
-                new System.Data.DataColumn("小計",         typeof(String)),
-                new System.Data.DataColumn("小計割引",     typeof(String)),
-                new System.Data.DataColumn("合計",         typeof(String)),
-                new System.Data.DataColumn("内税",         typeof(String)),
-                new System.Data.DataColumn("お預かり",     typeof(String)),
-                new System.Data.DataColumn("お釣り",       typeof(String)),
+                new DataColumn("レシート番号", typeof(String)),
+                new DataColumn("住所",         typeof(String)),
+                new DataColumn("電話番号",     typeof(String)),
+                new DataColumn("店舗名",       typeof(String)),
+                new DataColumn("日時",         typeof(DateTime)),
+                new DataColumn("店舗コード",   typeof(String)),
+                new DataColumn("POS",          typeof(String)),
+                new DataColumn("スタッフ",     typeof(String)),
+                new DataColumn("返品",         typeof(Boolean)),
+                new DataColumn("品名",         typeof(String)),
+                new DataColumn("JAN",          typeof(String)),
+                new DataColumn("上代",         typeof(Int32)),
+                new DataColumn("数量",         typeof(Int32)),
+                new DataColumn("商品合計",     typeof(Decimal)),
+                new DataColumn("商品割引",     typeof(String)),
+                new DataColumn("お買上点数",   typeof(String)),
+                new DataColumn("小計",         typeof(String)),
+                new DataColumn("小計割引",     typeof(String)),
+                new DataColumn("合計",         typeof(String)),
+                new DataColumn("内税",         typeof(String)),
+                new DataColumn("お預かり",     typeof(String)),
+                new DataColumn("お釣り",       typeof(String)),
             });
 
-            foreach (var receipt in source.Collection)
+            foreach (var receipt in Source.Collection)
             {
                 if (receipt.Header.IsPractice || receipt.Header.IsRePrint) { continue; }
                 foreach (var k in receipt.Total.Values.Keys)

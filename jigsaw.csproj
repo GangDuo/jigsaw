@@ -52,7 +52,7 @@
     <Compile Include="Engine\Header.cs" />
     <Compile Include="Engine\Membership.cs" />
     <Compile Include="Engine\Meta.cs" />
-    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\Expression.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Engine\Receipt.cs" />
