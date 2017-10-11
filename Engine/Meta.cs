@@ -9,31 +9,36 @@ namespace jigsaw.Engine
         private static readonly string RePrintPattern = @"\*+\s*再印刷\s*\*+";
         private static readonly string ReturnPattern = @"\*+\s*返品\s*\*+";
 
-        public static string RemoveMetaPhrase(string rawText)
+        public string Raw { get; private set; }
+        public string Payload { get; private set; }
+
+        public Meta(string rawText)
         {
-            var tmp = rawText;
+            Raw = rawText;
+
+            var tmp = string.Copy(Raw);
             var xs = typeof(Meta).GetFields(BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.GetField);
             foreach (FieldInfo info in xs)
             {
                 var pattern = info.GetValue(null).ToString();
                 tmp = Regex.Replace(tmp, pattern, "");
             }
-            return tmp;
+            Payload = tmp;
         }
 
-        public static bool IsPractice(string rawText)
+        public bool IsPractice()
         {
-            return Regex.IsMatch(rawText, PracticePattern);
+            return Regex.IsMatch(Raw, PracticePattern);
         }
 
-        public static bool IsRePrint(string rawText)
+        public bool IsRePrint()
         {
-            return Regex.IsMatch(rawText, RePrintPattern);
+            return Regex.IsMatch(Raw, RePrintPattern);
         }
 
-        public static bool IsReturn(string rawText)
+        public bool IsReturn()
         {
-            return Regex.IsMatch(rawText, ReturnPattern);
+            return Regex.IsMatch(Raw, ReturnPattern);
         }
     }
 }

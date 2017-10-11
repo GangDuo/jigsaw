@@ -48,7 +48,7 @@ namespace jigsaw.Engine
         {
             List<Func<string, string>> xs = new List<Func<string, string>>()
             {
-                (s) => { return Meta.RemoveMetaPhrase(s); },
+                (s) => { return (new Meta(s)).Payload; },
                 (s) => { return Regex.Replace(s, ReceiptCodePattern, String.Empty); },
                 (s) => { return Regex.Replace(s, @"\{##\}[\S\s]+\{##\}", "", RegexOptions.Multiline); },
                 (s) => { return Regex.Replace(s, @"\+-{12}\+[\S\s]+\+-{12}\+", "", RegexOptions.Multiline); }

@@ -27,11 +27,12 @@ namespace jigsaw.Engine
 
         public override void Parse()
         {
-            IsPractice = Meta.IsPractice(Raw);
-            IsRePrint  = Meta.IsRePrint(Raw);
-            IsReturn = Meta.IsReturn(Raw);       
+            var meta = new Meta(Raw);
+            IsPractice = meta.IsPractice();
+            IsRePrint  = meta.IsRePrint();
+            IsReturn = meta.IsReturn();       
 
-            var lines = Regex.Split(Meta.RemoveMetaPhrase(String.Copy(Raw)), Boundary, RegexOptions.Multiline)
+            var lines = Regex.Split(meta.Payload, Boundary, RegexOptions.Multiline)
                 .Where(line => !String.IsNullOrEmpty(line)).ToArray();
 
             Debug.Assert(lines.Length == 6);
