@@ -7,7 +7,6 @@ namespace jigsaw.Engine
 {
     class Footer : AbstractParser
     {
-        private static readonly string Boundary = @"^\r*\n*";
         private static readonly string ReceiptCodePattern = @"\{#<R>(\d+)#\}";
 
         // レシート番号
@@ -19,48 +18,27 @@ namespace jigsaw.Engine
         public Footer(string rawText)
         {
             Raw = rawText;
-            Info = new Membership();
         }
 
         public override void Parse()
         {
             ReceiptCode = Regex.Match(Raw, ReceiptCodePattern).Groups[1].Value;
 
-            var lines = Regex.Split(RemovePhrase(), Boundary, RegexOptions.Multiline)
-                .Where(line => !String.IsNullOrEmpty(line)).ToArray();
-            foreach (var line in lines)
-            {
-                Console.WriteLine(line);
-                var mc = Regex.Matches(line, @"(\S+)(\s|\t|：)+(\S+)");
-                if (line.Trim().Length > 0 && mc.Count == 0)
-                {
-                    Info.Values.Add(line.Trim(), String.Empty);
-                }
-                foreach (Match m in mc)
-                {
-                    Info.Values.Add(m.Groups[1].Value, m.Groups[3].Value);
-                }
-            }
-        }
-
-        private string SourceText;
-        private string RemovePhrase()
-        {
             List<Func<string, string>> xs = new List<Func<string, string>>()
             {
                 (s) => { return (new Meta(s)).Payload; },
                 (s) => { return Regex.Replace(s, ReceiptCodePattern, String.Empty); },
-                (s) => { return Regex.Replace(s, @"\{##\}[\S\s]+\{##\}", "", RegexOptions.Multiline); },
-                (s) => { return Regex.Replace(s, @"\+-{12}\+[\S\s]+\+-{12}\+", "", RegexOptions.Multiline); }
+                (s) => { return Regex.Replace(s, @"\{##\}[\S\s]+\{##\}", "", RegexOptions.Multiline); },        // 広告
+                (s) => { return Regex.Replace(s, @"\+-{12}\+[\S\s]+\+-{12}\+", "", RegexOptions.Multiline); }   // 収入印紙
             };
-
-            var tmp = String.Copy(Raw);
+            var payload = String.Copy(Raw);
             foreach (var x in xs)
             {
-                tmp = x(tmp);
+                payload = x(payload);
             }
-            SourceText = tmp;
-            return tmp;
+
+            Info = new Membership(payload);
+            Info.Parse();
         }
     }
 }
