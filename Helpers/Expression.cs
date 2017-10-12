@@ -77,10 +77,10 @@ namespace jigsaw.Helpers
                     row["店舗名"] = receipt.Header.Where;
                     row["住所"] = receipt.Header.Address;
                     row["電話番号"] = receipt.Header.Tel;
-                    row["日時"] = receipt.Header.When;
-                    row["店舗コード"] = receipt.Header.ShopCode;
-                    row["POS"] = receipt.Header.PosCode;
-                    row["スタッフ"] = receipt.Header.StaffCode;
+                    row["日時"] = receipt.Header.PosService.When;
+                    row["店舗コード"] = receipt.Header.PosService.ShopCode;
+                    row["POS"] = receipt.Header.PosService.PosCode;
+                    row["スタッフ"] = receipt.Header.Staff.Code;
                     row["レシート番号"] = receipt.Footer.ReceiptCode;
                     row["品名"] = x.Name;
                     row["JAN"] = x.Jan;

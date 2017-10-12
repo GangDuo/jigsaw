@@ -103,10 +103,10 @@ namespace jigsaw.UnitTest
             Assert.AreEqual("太田飯塚店", instance.Header.Where);
             Assert.AreEqual("群馬県太田市飯塚町801-1", instance.Header.Address);
             Assert.AreEqual("TEL:045-640-5633", instance.Header.Tel);
-            Assert.AreEqual(new DateTime(2017, 4, 15, 18, 59, 50), instance.Header.When);
-            Assert.AreEqual("007", instance.Header.ShopCode);
-            Assert.AreEqual("111", instance.Header.PosCode);
-            Assert.AreEqual("0941", instance.Header.StaffCode);
+            Assert.AreEqual(new DateTime(2017, 4, 15, 18, 59, 50), instance.Header.PosService.When);
+            Assert.AreEqual("007", instance.Header.PosService.ShopCode);
+            Assert.AreEqual("111", instance.Header.PosService.PosCode);
+            Assert.AreEqual("0941", instance.Header.Staff.Code);
 
             Assert.AreEqual(14, instance.Goods.Collection.Count);
             {

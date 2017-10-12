@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="Engine\AbstractParser.cs" />
     <Compile Include="Engine\Component\Deposit.cs" />
+    <Compile Include="Engine\Component\HeaderNames\PosService.cs" />
+    <Compile Include="Engine\Component\HeaderNames\Staff.cs" />
     <Compile Include="Engine\Enhancement\ForRegex.cs" />
     <Compile Include="Engine\Component\Footer.cs" />
     <Compile Include="Engine\Component\Goods.cs" />
@@ -69,6 +71,7 @@
       <Name>Text</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
