@@ -10,9 +10,7 @@ namespace jigsaw.Engine.Component
     {
         private static readonly string Boundary = @"^\r*\n*";
 
-        public bool IsPractice { get; private set; }
-        public bool IsRePrint { get; private set; }
-        public bool IsReturn { get; private set; }
+        public Meta Meta { get; private set; }
         public string Where { get; private set; }
         public string Address { get; private set; }
         public string Tel { get; private set; }
@@ -26,12 +24,8 @@ namespace jigsaw.Engine.Component
 
         public override void Parse()
         {
-            var meta = new Meta(Raw);
-            IsPractice = meta.IsPractice();
-            IsRePrint  = meta.IsRePrint();
-            IsReturn = meta.IsReturn();       
-
-            var lines = Regex.Split(meta.Payload, Boundary, RegexOptions.Multiline)
+            Meta = new Meta(Raw);
+            var lines = Regex.Split(Meta.Payload, Boundary, RegexOptions.Multiline)
                 .Where(line => !String.IsNullOrEmpty(line)).ToArray();
 
             Debug.Assert(lines.Length == 6);

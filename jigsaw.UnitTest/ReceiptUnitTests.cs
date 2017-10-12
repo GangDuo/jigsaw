@@ -67,9 +67,9 @@ namespace jigsaw.UnitTest
         {
             var instance = new Receipt(System.IO.File.ReadAllText(@"DATA\練習.txt"));
             instance.Parse();
-            Assert.IsTrue(instance.Header.IsPractice);
-            Assert.IsFalse(instance.Header.IsRePrint);
-            Assert.IsFalse(instance.Header.IsReturn);
+            Assert.IsTrue(instance.Header.Meta.IsPractice);
+            Assert.IsFalse(instance.Header.Meta.IsRePrint);
+            Assert.IsFalse(instance.Header.Meta.IsReturn);
         }
 
         [TestMethod]
@@ -77,9 +77,9 @@ namespace jigsaw.UnitTest
         {
             var instance = new Receipt(System.IO.File.ReadAllText(@"DATA\再印刷.txt"));
             instance.Parse();
-            Assert.IsFalse(instance.Header.IsPractice);
-            Assert.IsTrue(instance.Header.IsRePrint);
-            Assert.IsFalse(instance.Header.IsReturn);
+            Assert.IsFalse(instance.Header.Meta.IsPractice);
+            Assert.IsTrue(instance.Header.Meta.IsRePrint);
+            Assert.IsFalse(instance.Header.Meta.IsReturn);
         }
 
         [TestMethod]
@@ -87,9 +87,9 @@ namespace jigsaw.UnitTest
         {
             var instance = new Receipt(System.IO.File.ReadAllText(@"DATA\返品.txt"));
             instance.Parse();
-            Assert.IsFalse(instance.Header.IsPractice);
-            Assert.IsFalse(instance.Header.IsRePrint);
-            Assert.IsTrue(instance.Header.IsReturn);
+            Assert.IsFalse(instance.Header.Meta.IsPractice);
+            Assert.IsFalse(instance.Header.Meta.IsRePrint);
+            Assert.IsTrue(instance.Header.Meta.IsReturn);
         }
 
         [TestMethod]
@@ -97,9 +97,9 @@ namespace jigsaw.UnitTest
         {
             var instance = new Receipt(System.IO.File.ReadAllText(@"DATA\通常.txt"));
             instance.Parse();
-            Assert.IsFalse(instance.Header.IsPractice);
-            Assert.IsFalse(instance.Header.IsRePrint);
-            Assert.IsFalse(instance.Header.IsReturn);
+            Assert.IsFalse(instance.Header.Meta.IsPractice);
+            Assert.IsFalse(instance.Header.Meta.IsRePrint);
+            Assert.IsFalse(instance.Header.Meta.IsReturn);
             Assert.AreEqual("太田飯塚店", instance.Header.Where);
             Assert.AreEqual("群馬県太田市飯塚町801-1", instance.Header.Address);
             Assert.AreEqual("TEL:045-640-5633", instance.Header.Tel);

@@ -11,10 +11,17 @@ namespace jigsaw.Engine
 
         public string Raw { get; private set; }
         public string Payload { get; private set; }
+        public bool IsPractice { get; private set; }
+        public bool IsRePrint { get; private set; }
+        public bool IsReturn { get; private set; }
 
         public Meta(string rawText)
         {
             Raw = rawText;
+
+            IsPractice = Regex.IsMatch(Raw, PracticePattern);
+            IsRePrint = Regex.IsMatch(Raw, RePrintPattern);
+            IsReturn = Regex.IsMatch(Raw, ReturnPattern);
 
             var tmp = string.Copy(Raw);
             var xs = typeof(Meta).GetFields(BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.GetField);
@@ -24,21 +31,6 @@ namespace jigsaw.Engine
                 tmp = Regex.Replace(tmp, pattern, "");
             }
             Payload = tmp;
-        }
-
-        public bool IsPractice()
-        {
-            return Regex.IsMatch(Raw, PracticePattern);
-        }
-
-        public bool IsRePrint()
-        {
-            return Regex.IsMatch(Raw, RePrintPattern);
-        }
-
-        public bool IsReturn()
-        {
-            return Regex.IsMatch(Raw, ReturnPattern);
         }
     }
 }

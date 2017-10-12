@@ -47,7 +47,7 @@ namespace jigsaw.Helpers
 
             foreach (var receipt in Source.Collection)
             {
-                if (receipt.Header.IsPractice || receipt.Header.IsRePrint) { continue; }
+                if (receipt.Header.Meta.IsPractice || receipt.Header.Meta.IsRePrint) { continue; }
                 foreach (var k in receipt.Total.Values.Keys)
                 {
                     if (!table.Columns.Contains(k))
@@ -73,7 +73,7 @@ namespace jigsaw.Helpers
                 foreach (var x in receipt.Goods.Collection)
                 {
                     var row = table.NewRow();
-                    row["返品"] = receipt.Header.IsReturn;
+                    row["返品"] = receipt.Header.Meta.IsReturn;
                     row["店舗名"] = receipt.Header.Where;
                     row["住所"] = receipt.Header.Address;
                     row["電話番号"] = receipt.Header.Tel;
