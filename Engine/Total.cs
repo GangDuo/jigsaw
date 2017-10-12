@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
+using jigsaw.Engine.Enhancement;
 
 namespace jigsaw.Engine
 {
@@ -18,16 +20,15 @@ namespace jigsaw.Engine
 
         public override void Parse()
         {
-            var lines = Regex.Split(Raw, Boundary, RegexOptions.Multiline)
-                .Where(line => !String.IsNullOrEmpty(line)).ToArray();
+            var lines = Regex.Split(Raw, Boundary, RegexOptions.Multiline).Where(line => !String.IsNullOrEmpty(line)).ToArray();
             foreach (var line in lines)
             {
-                Console.WriteLine(line);
-                var mc = Regex.Matches(line, @"(\S+)(\s|\t)+(\S+)");
-                foreach (Match m in mc)
+                var xs = Regex.Matches(line, @"(\S+)(\s|\t)+(\S+)").AsEnumerable().SelectMany(x => x).ToArray();
+                if(xs.Length > 0)
                 {
-                    Values.Add(m.Groups[1].Value.TrimStart(new char[] { '(' }),
-                               m.Groups[3].Value.TrimEnd(new char[] { ')' }));
+                    Debug.Assert(xs.Length == 4);
+                    Values.Add(xs[1].Value.TrimStart(new char[] { '(' }),
+                               xs[3].Value.TrimEnd(new char[] { ')' }));
                 }
             }
         }

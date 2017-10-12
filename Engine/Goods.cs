@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Linq;
+using jigsaw.Engine.Enhancement;
 
 namespace jigsaw.Engine
 {
@@ -22,20 +24,20 @@ namespace jigsaw.Engine
         public override void Parse()
         {
             var fields = Raw.Split(new string[] { Boundary }, StringSplitOptions.RemoveEmptyEntries);
-            var mc = Regex.Matches(fields[1], @"^(\S+)(\s|\t)+\(@(\S+)×(\S+)\)");
-            foreach (Match m in mc)
+            var xs = Regex.Matches(fields[1], @"^(\S+)(\s|\t)+\(@(\S+)×(\S+)\)").AsEnumerable().SelectMany(x => x).ToArray();
+            if (xs.Length > 0)
             {
-                Jan = m.Groups[1].Value;
-                Price = int.Parse(m.Groups[3].Value.Replace(",", ""));
-                Qty = int.Parse(m.Groups[4].Value);
+                Jan = xs[1].Value;
+                Price = int.Parse(xs[3].Value.Replace(",", ""));
+                Qty = int.Parse(xs[4].Value);
             }
             Name = fields[0].Trim();
 
-            mc = Regex.Matches(fields[2], @"(\S*)\s+\\(\S+)");
-            foreach (Match m in mc)
+            xs = Regex.Matches(fields[2], @"(\S*)\s+\\(\S+)").AsEnumerable().SelectMany(x => x).ToArray();
+            if (xs.Length > 0)
             {
-                DiscountRate = m.Groups[1].Value;
-                Total = Decimal.Parse(m.Groups[2].Value);
+                DiscountRate = xs[1].Value;
+                Total = Decimal.Parse(xs[2].Value);
             }
         }
     }

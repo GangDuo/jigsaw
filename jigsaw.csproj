@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Engine\AbstractParser.cs" />
     <Compile Include="Engine\Deposit.cs" />
+    <Compile Include="Engine\Enhancement\ForRegex.cs" />
     <Compile Include="Engine\Footer.cs" />
     <Compile Include="Engine\Goods.cs" />
     <Compile Include="Engine\GoodsCollection.cs" />

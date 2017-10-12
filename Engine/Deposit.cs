@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using jigsaw.Engine.Enhancement;
 
 namespace jigsaw.Engine
 {
@@ -22,15 +23,14 @@ namespace jigsaw.Engine
                 .Where(line => !String.IsNullOrEmpty(line)).ToArray();
             foreach (var line in lines)
             {
-                Console.WriteLine(line);
-                var mc = Regex.Matches(line, @"(\S+)(\s|\t)+(\S+)");
-                if (mc.Count == 0)
+                var xs = Regex.Matches(line, @"(\S+)(\s|\t)+(\S+)").AsEnumerable().SelectMany(x => x).ToArray();
+                if (xs.Length == 0)
                 {
                     Values.Add(line.Trim(), "");
                 }
-                foreach (Match m in mc)
+                else
                 {
-                    Values.Add(m.Groups[1].Value, m.Groups[3].Value);
+                    Values.Add(xs[1].Value, xs[3].Value);
                 }
             }
         }
