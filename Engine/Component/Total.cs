@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using jigsaw.Engine.Enhancement;
 
-namespace jigsaw.Engine
+namespace jigsaw.Engine.Component
 {
     class Total : AbstractParser
     {

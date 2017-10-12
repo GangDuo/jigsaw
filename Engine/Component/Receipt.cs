@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace jigsaw.Engine
+namespace jigsaw.Engine.Component
 {
     class Receipt: AbstractParser
     {

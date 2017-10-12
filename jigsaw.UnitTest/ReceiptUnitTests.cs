@@ -2,7 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using jigsaw.Engine;
+using jigsaw.Engine.Component;
 
 namespace jigsaw.UnitTest
 {

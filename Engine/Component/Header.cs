@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace jigsaw.Engine
+namespace jigsaw.Engine.Component
 {
     class Header: AbstractParser
     {

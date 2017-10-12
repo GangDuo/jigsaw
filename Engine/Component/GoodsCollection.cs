@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace jigsaw.Engine
+namespace jigsaw.Engine.Component
 {
     class GoodsCollection : AbstractParser
     {
