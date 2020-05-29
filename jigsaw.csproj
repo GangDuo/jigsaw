@@ -66,12 +66,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Text\Text.csproj">
+    <ProjectReference Include="lib\Text.Net\Text.csproj">
       <Project>{0f6ba882-8777-47f4-a40a-5c8b3e8b1037}</Project>
       <Name>Text</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

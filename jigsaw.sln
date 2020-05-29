@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jigsaw", "jigsaw.csproj", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jigsaw.UnitTest", "jigsaw.UnitTest\jigsaw.UnitTest.csproj", "{14F1FB96-1A91-4465-B312-011AC16437B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Text", "..\..\..\Text\Text.csproj", "{0F6BA882-8777-47F4-A40A-5C8B3E8B1037}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Text", "lib\Text.Net\Text.csproj", "{0F6BA882-8777-47F4-A40A-5C8B3E8B1037}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
