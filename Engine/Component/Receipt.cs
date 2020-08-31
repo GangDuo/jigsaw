@@ -22,13 +22,15 @@ namespace jigsaw.Engine.Component
         public override void Parse()
         {
             var splited = Regex.Split(Raw, Boundary);
+            var last = splited.Length - 1;
 
-            Debug.Assert(splited.Length == 5);
+            Debug.Assert(splited.Length == 5 || splited.Length == 6);
             Header = new Header(splited[0]);            // ヘッダ
             Goods = new GoodsCollection(splited[1]);    // 購入商品
             Total = new Total(splited[2]);              // 明細合計金額
             Deposit = new Deposit(splited[3]);          // 預かり金額＆お釣り
-            Footer = new Footer(splited[4]);            // フッタ
+                                                        // 軽減税率（8%）対象商品　※無いときもある
+            Footer = new Footer(splited[last]);         // フッタ
 
             foreach (PropertyInfo info in this.GetType().GetProperties())
             {

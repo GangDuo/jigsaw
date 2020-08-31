@@ -24,20 +24,21 @@ namespace jigsaw.Engine.Component
         public override void Parse()
         {
             var fields = Raw.Split(new string[] { Boundary }, StringSplitOptions.RemoveEmptyEntries);
-            var xs = Regex.Matches(fields[1], @"^(\S+)(\s|\t)+\(@(\S+)×(\S+)\)").AsEnumerable().SelectMany(x => x).ToArray();
-            if (xs.Length > 0)
-            {
-                Jan = xs[1].Value;
-                Price = int.Parse(xs[3].Value.Replace(",", ""));
-                Qty = int.Parse(xs[4].Value);
-            }
             Name = fields[0].Trim();
-
-            xs = Regex.Matches(fields[2], @"(\S*)\s+\\(\S+)").AsEnumerable().SelectMany(x => x).ToArray();
+            Jan = fields[1].Trim();
+            // 上代、数量、商品割引
+            var xs = Regex.Matches(fields[fields.Length - 3], @"^\(@(\S+)×(\S+)\)(\s+\(割引：(\S*)\))?").AsEnumerable().SelectMany(x => x).ToArray();
             if (xs.Length > 0)
             {
-                DiscountRate = xs[1].Value;
-                Total = Decimal.Parse(xs[2].Value);
+                Price = int.Parse(xs[1].Value.Replace(",", ""));
+                Qty = int.Parse(xs[2].Value);
+                DiscountRate = xs[4].Value;
+            }
+            // 商品合計
+            xs = Regex.Matches(fields[fields.Length - 2], @"\s+\\(\S+)").AsEnumerable().SelectMany(x => x).ToArray();
+            if (xs.Length > 0)
+            {
+                Total = Decimal.Parse(xs[1].Value);
             }
         }
     }
